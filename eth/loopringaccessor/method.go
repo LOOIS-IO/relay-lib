@@ -20,9 +20,9 @@ package loopringaccessor
 
 import (
 	"errors"
-	"github.com/Loopring/relay-lib/eth/abi"
-	"github.com/Loopring/relay-lib/eth/accessor"
-	"github.com/Loopring/relay-lib/types"
+	"github.com/LOOIS-IO/relay-lib/eth/abi"
+	"github.com/LOOIS-IO/relay-lib/eth/accessor"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )

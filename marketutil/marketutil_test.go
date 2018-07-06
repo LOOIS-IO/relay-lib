@@ -20,8 +20,8 @@ package marketutil_test
 
 import (
 	"fmt"
-	util "github.com/Loopring/relay-lib/marketutil"
-	"github.com/Loopring/relay-lib/types"
+	util "github.com/LOOIS-IO/relay-lib/marketutil"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"testing"

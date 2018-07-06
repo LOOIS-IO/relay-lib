@@ -6,7 +6,7 @@ import (
 
 	motan "github.com/Loopring/motan-go/core"
 	"github.com/Loopring/motan-go/log"
-	"github.com/Loopring/relay-lib/cloudwatch"
+	"github.com/LOOIS-IO/relay-lib/cloudwatch"
 	"time"
 )
 

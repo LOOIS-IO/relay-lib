@@ -20,8 +20,8 @@ package motan_test
 
 import (
 	"fmt"
-	"github.com/Loopring/relay-lib/motan"
-	"github.com/Loopring/relay-lib/motan/demo"
+	"github.com/LOOIS-IO/relay-lib/motan"
+	"github.com/LOOIS-IO/relay-lib/motan/demo"
 	"testing"
 )
 

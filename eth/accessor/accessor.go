@@ -20,9 +20,9 @@ package accessor
 
 import (
 	"fmt"
-	"github.com/Loopring/relay-lib/eth/abi"
-	libEthTypes "github.com/Loopring/relay-lib/eth/types"
-	"github.com/Loopring/relay-lib/types"
+	"github.com/LOOIS-IO/relay-lib/eth/abi"
+	libEthTypes "github.com/LOOIS-IO/relay-lib/eth/types"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	ethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rpc"

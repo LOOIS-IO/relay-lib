@@ -19,7 +19,7 @@
 package eventemitter
 
 import (
-	"github.com/Loopring/relay-lib/log"
+	"github.com/LOOIS-IO/relay-lib/log"
 	"sync"
 )
 

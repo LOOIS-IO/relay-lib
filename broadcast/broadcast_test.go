@@ -20,12 +20,12 @@ package broadcast_test
 
 import (
 	"encoding/json"
-	"github.com/Loopring/relay-lib/broadcast"
-	"github.com/Loopring/relay-lib/broadcast/matrix"
-	"github.com/Loopring/relay-lib/cache"
-	"github.com/Loopring/relay-lib/cache/redis"
-	"github.com/Loopring/relay-lib/log"
-	"github.com/Loopring/relay-lib/types"
+	"github.com/LOOIS-IO/relay-lib/broadcast"
+	"github.com/LOOIS-IO/relay-lib/broadcast/matrix"
+	"github.com/LOOIS-IO/relay-lib/cache"
+	"github.com/LOOIS-IO/relay-lib/cache/redis"
+	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"go.uber.org/zap"
 	"math/big"
 	"math/rand"

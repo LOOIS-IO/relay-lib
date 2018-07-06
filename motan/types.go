@@ -19,7 +19,7 @@
 package motan
 
 import (
-	"github.com/Loopring/relay-lib/types"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )

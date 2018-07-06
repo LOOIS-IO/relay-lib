@@ -19,7 +19,7 @@
 package cache
 
 import (
-	myredis "github.com/Loopring/relay-lib/cache/redis"
+	myredis "github.com/LOOIS-IO/relay-lib/cache/redis"
 )
 
 var cache Cache
