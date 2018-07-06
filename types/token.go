@@ -26,6 +26,7 @@ import (
 )
 
 type Token struct {
+	FakeProtocol common.Address `json:"fakeProtocol"`
 	Protocol common.Address `json:"protocol"`
 	Symbol   string         `json:"symbol"`
 	Name     string         `json:"name"`

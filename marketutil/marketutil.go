@@ -80,6 +80,7 @@ func StartRefreshCron(option *MarketOptions) {
 }
 
 type token struct {
+	FakeProtocol string `json:"FakeProtocol"`
 	Protocol string `json:"Protocol"`
 	Symbol   string `json:"Symbol"`
 	Name     string `json:"Name"`
@@ -93,7 +94,13 @@ type token struct {
 func (t *token) convert() types.Token {
 	var dst types.Token
 
-	dst.Protocol = common.HexToAddress(t.Protocol)
+	if len(t.FakeProtocol) > 0 {
+		dst.FakeProtocol = common.HexToAddress(t.FakeProtocol)
+		dst.Protocol = dst.FakeProtocol
+	} else {
+		dst.Protocol = common.HexToAddress(t.Protocol)
+	}
+	
 	dst.Symbol = strings.ToUpper(t.Symbol)
 	dst.Name = strings.ToUpper(t.Name)
 	dst.Source = t.Source
