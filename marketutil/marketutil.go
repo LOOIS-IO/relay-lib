@@ -88,7 +88,7 @@ type token struct {
 	Decimals int    `json:"Decimals"`
 	IsMarket bool   `json:"IsMarket"`
 	IcoPrice string `json:"IcoPrice"`
-	IsFreedom bool  `json:"isFreedom"`
+	AreaType int    `json:"areaType"`
 }
 
 func (t *token) convert() types.Token {
@@ -106,7 +106,7 @@ func (t *token) convert() types.Token {
 		dst.IcoPrice = new(big.Rat)
 		dst.IcoPrice.SetString(t.IcoPrice)
 	}
-	dst.IsFreedom = t.IsFreedom
+	dst.AreaType = t.AreaType
 	return dst
 }
 
