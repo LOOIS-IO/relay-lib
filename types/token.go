@@ -35,6 +35,7 @@ type Token struct {
 	Decimals *big.Int       `json:"decimals"`
 	IsMarket bool           `json:"isMarket"`
 	IcoPrice *big.Rat       `json:"icoPrice"`
+	IsFreedom bool          `json:"isFreedom"`
 }
 
 type CurrencyMarketCap struct {
