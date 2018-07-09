@@ -18,7 +18,7 @@
 
 package broadcast
 
-import "github.com/Loopring/relay-lib/log"
+import "github.com/LOOIS-IO/relay-lib/log"
 
 type MatrixBroadcaster struct {
 }

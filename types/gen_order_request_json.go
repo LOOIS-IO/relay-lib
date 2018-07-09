@@ -7,7 +7,7 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/Loopring/relay-lib/crypto"
+	"github.com/LOOIS-IO/relay-lib/crypto"
 	"github.com/ethereum/go-ethereum/common"
 )
 
