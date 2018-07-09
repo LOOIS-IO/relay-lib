@@ -2,8 +2,8 @@ package zklock_test
 
 import (
 	"encoding/json"
-	"github.com/Loopring/relay-lib/log"
-	"github.com/Loopring/relay-lib/zklock"
+	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/LOOIS-IO/relay-lib/zklock"
 	"go.uber.org/zap"
 	"testing"
 	"time"

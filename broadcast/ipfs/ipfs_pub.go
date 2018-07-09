@@ -19,8 +19,8 @@
 package ipfs
 
 import (
-	"github.com/Loopring/relay-lib/log"
-	"github.com/Loopring/relay-lib/types"
+	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"github.com/ipfs/go-ipfs-api"
 	"strconv"
 	"strings"

@@ -19,9 +19,9 @@
 package loopringaccessor
 
 import (
-	"github.com/Loopring/relay-lib/eth/abi"
-	"github.com/Loopring/relay-lib/eth/accessor"
-	"github.com/Loopring/relay-lib/log"
+	"github.com/LOOIS-IO/relay-lib/eth/abi"
+	"github.com/LOOIS-IO/relay-lib/eth/accessor"
+	"github.com/LOOIS-IO/relay-lib/log"
 	"github.com/ethereum/go-ethereum/common"
 	"fmt"
 )

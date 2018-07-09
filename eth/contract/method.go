@@ -20,9 +20,9 @@ package contract
 
 import (
 	"fmt"
-	"github.com/Loopring/relay-lib/crypto"
-	"github.com/Loopring/relay-lib/eth/abi"
-	"github.com/Loopring/relay-lib/types"
+	"github.com/LOOIS-IO/relay-lib/crypto"
+	"github.com/LOOIS-IO/relay-lib/eth/abi"
+	"github.com/LOOIS-IO/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )

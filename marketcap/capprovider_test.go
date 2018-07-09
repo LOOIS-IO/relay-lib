@@ -20,12 +20,12 @@ package marketcap_test
 
 import (
 	"encoding/json"
-	"github.com/Loopring/relay-lib/cache"
-	"github.com/Loopring/relay-lib/cache/redis"
-	"github.com/Loopring/relay-lib/log"
-	"github.com/Loopring/relay-lib/marketcap"
-	"github.com/Loopring/relay-lib/marketutil"
-	"github.com/Loopring/relay-lib/zklock"
+	"github.com/LOOIS-IO/relay-lib/cache"
+	"github.com/LOOIS-IO/relay-lib/cache/redis"
+	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/LOOIS-IO/relay-lib/marketcap"
+	"github.com/LOOIS-IO/relay-lib/marketutil"
+	"github.com/LOOIS-IO/relay-lib/zklock"
 	"github.com/ethereum/go-ethereum/common"
 	"go.uber.org/zap"
 	"math/big"
