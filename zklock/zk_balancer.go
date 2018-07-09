@@ -21,8 +21,8 @@ package zklock
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/LOOIS-IO/relay-lib/log"
-	"github.com/LOOIS-IO/relay-lib/utils"
+	"github.com/Loopring/relay-lib/log"
+	"github.com/Loopring/relay-lib/utils"
 	"github.com/samuel/go-zookeeper/zk"
 	"sort"
 	"sync"
@@ -42,7 +42,7 @@ const balancerShareBasePath = "/loopring_balancer"
 const worker_path = "worker"
 const event_path = "event"
 
-const localIpPrefix = "172.31"
+const localIpPrefix = "172.17"
 const releasingTimeout = 120
 
 type ZkBalancer struct {

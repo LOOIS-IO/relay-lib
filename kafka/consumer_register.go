@@ -21,7 +21,7 @@ package kafka
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/bsm/sarama-cluster"
 	"reflect"
 	"sync"

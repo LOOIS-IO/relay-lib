@@ -19,14 +19,14 @@
 package gasprice_evaluator
 
 import (
-	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cloudwatch"
-	"github.com/LOOIS-IO/relay-lib/eth/accessor"
-	ethtyp "github.com/LOOIS-IO/relay-lib/eth/types"
-	"github.com/LOOIS-IO/relay-lib/log"
-	"github.com/LOOIS-IO/relay-lib/sns"
-	"github.com/LOOIS-IO/relay-lib/types"
-	"github.com/LOOIS-IO/relay-lib/zklock"
+	"github.com/Loopring/relay-lib/cache"
+	"github.com/Loopring/relay-lib/cloudwatch"
+	"github.com/Loopring/relay-lib/eth/accessor"
+	ethtyp "github.com/Loopring/relay-lib/eth/types"
+	"github.com/Loopring/relay-lib/log"
+	"github.com/Loopring/relay-lib/sns"
+	"github.com/Loopring/relay-lib/types"
+	"github.com/Loopring/relay-lib/zklock"
 	"math/big"
 	"sort"
 )

@@ -19,8 +19,8 @@
 package types
 
 import (
-	"github.com/LOOIS-IO/relay-lib/crypto"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/crypto"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"time"

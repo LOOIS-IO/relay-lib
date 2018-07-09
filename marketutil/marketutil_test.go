@@ -20,8 +20,8 @@ package marketutil_test
 
 import (
 	"fmt"
-	util "github.com/LOOIS-IO/relay-lib/marketutil"
-	"github.com/LOOIS-IO/relay-lib/types"
+	util "github.com/Loopring/relay-lib/marketutil"
+	"github.com/Loopring/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"testing"
@@ -41,7 +41,7 @@ func TestCalculatePrice(t *testing.T) {
 	if price != 0.00007 {
 		t.Error("not right")
 	} else {
-		t.Error("xxxxx")
+		t.Log("xxxxx")
 	}
 	t.Fatal("ksfjlsdjfklj")
 }

@@ -20,12 +20,12 @@ package gasprice_evaluator_test
 
 import (
 	"encoding/json"
-	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cache/redis"
-	"github.com/LOOIS-IO/relay-lib/eth/accessor"
-	"github.com/LOOIS-IO/relay-lib/eth/gasprice_evaluator"
-	"github.com/LOOIS-IO/relay-lib/log"
-	"github.com/LOOIS-IO/relay-lib/zklock"
+	"github.com/Loopring/relay-lib/cache"
+	"github.com/Loopring/relay-lib/cache/redis"
+	"github.com/Loopring/relay-lib/eth/accessor"
+	"github.com/Loopring/relay-lib/eth/gasprice_evaluator"
+	"github.com/Loopring/relay-lib/log"
+	"github.com/Loopring/relay-lib/zklock"
 	"go.uber.org/zap"
 	"math/big"
 	"testing"

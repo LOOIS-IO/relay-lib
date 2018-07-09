@@ -20,12 +20,12 @@ package marketcap_test
 
 import (
 	"encoding/json"
-	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cache/redis"
-	"github.com/LOOIS-IO/relay-lib/log"
-	"github.com/LOOIS-IO/relay-lib/marketcap"
-	"github.com/LOOIS-IO/relay-lib/marketutil"
-	"github.com/LOOIS-IO/relay-lib/zklock"
+	"github.com/Loopring/relay-lib/cache"
+	"github.com/Loopring/relay-lib/cache/redis"
+	"github.com/Loopring/relay-lib/log"
+	"github.com/Loopring/relay-lib/marketcap"
+	"github.com/Loopring/relay-lib/marketutil"
+	"github.com/Loopring/relay-lib/zklock"
 	"github.com/ethereum/go-ethereum/common"
 	"go.uber.org/zap"
 	"math/big"
@@ -58,14 +58,14 @@ func init() {
 	}
 	log.Initialize(cfg)
 
-	cache.NewCache(redis.RedisOptions{Host: "127.0.0.1", Port: "6379"})
+	cache.NewCache(redis.RedisOptions{Host: "192.168.1.30", Port: "6379", Password: "123456"})
 
 	options := marketutil.MarketOptions{}
-	options.TokenFile = "/Users/yuhongyu/Desktop/service/go/src/github.com/Loopring/miner/config/tokens.json"
+	options.TokenFile = "/Users/zouwenchen/Project/gocode/src/github.com/Loopring/miner/config/tokens.json"
 	marketutil.Initialize(&options)
 
 	zkconfig := zklock.ZkLockConfig{}
-	zkconfig.ZkServers = "127.0.0.1:2181"
+	zkconfig.ZkServers = "192.168.1.30:2181"
 	zkconfig.ConnectTimeOut = 10000
 	zklock.Initialize(zkconfig)
 }

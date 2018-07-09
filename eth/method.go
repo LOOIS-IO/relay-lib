@@ -19,8 +19,8 @@
 package eth
 
 import (
-	"github.com/LOOIS-IO/relay-lib/eth/accessor"
-	"github.com/LOOIS-IO/relay-lib/eth/loopringaccessor"
+	"github.com/Loopring/relay-lib/eth/accessor"
+	"github.com/Loopring/relay-lib/eth/loopringaccessor"
 )
 
 func InitializeAccessor(accessorOptions accessor.AccessorOptions, loopringOptions loopringaccessor.LoopringProtocolOptions) error {

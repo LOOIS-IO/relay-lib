@@ -20,8 +20,8 @@ package extractor_test
 
 import (
 	"encoding/json"
-	"github.com/LOOIS-IO/relay-lib/eventemitter"
-	"github.com/LOOIS-IO/relay-lib/types"
+	"github.com/Loopring/relay-lib/eventemitter"
+	"github.com/Loopring/relay-lib/types"
 	"math/big"
 	"testing"
 )

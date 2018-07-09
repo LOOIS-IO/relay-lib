@@ -20,10 +20,10 @@ package ipfs
 
 import (
 	"fmt"
-	"github.com/LOOIS-IO/relay-lib/eventemitter"
-	"github.com/LOOIS-IO/relay-lib/types"
+	"github.com/Loopring/relay-lib/eventemitter"
+	"github.com/Loopring/relay-lib/types"
 
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/log"
 	"sync"
 )
 

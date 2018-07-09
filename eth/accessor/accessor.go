@@ -20,9 +20,9 @@ package accessor
 
 import (
 	"fmt"
-	"github.com/LOOIS-IO/relay-lib/eth/abi"
-	libEthTypes "github.com/LOOIS-IO/relay-lib/eth/types"
-	"github.com/LOOIS-IO/relay-lib/types"
+	"github.com/Loopring/relay-lib/eth/abi"
+	libEthTypes "github.com/Loopring/relay-lib/eth/types"
+	"github.com/Loopring/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	ethTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rpc"
@@ -119,7 +119,8 @@ func BatchCall(routeParam string, reqs []BatchReq) error {
 		elemsLength = append(elemsLength, len(elems1))
 		elems = append(elems, elems1...)
 	}
-	if elems, err = accessor.RetryBatchCall(routeParam, elems, 3); nil != err {
+	if elems, err = accessor.RetryBatchCall(routeParam, elems,3); nil != err {
+		fmt.Println("返回错误")
 		return err
 	} else {
 		startId := 0

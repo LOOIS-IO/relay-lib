@@ -20,9 +20,9 @@ package cache_test
 
 import (
 	"encoding/json"
-	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cache/redis"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/cache"
+	"github.com/Loopring/relay-lib/cache/redis"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/naoina/toml"
 	"go.uber.org/zap"
 	"os"

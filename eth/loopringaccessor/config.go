@@ -20,7 +20,7 @@ package loopringaccessor
 
 import (
 	"fmt"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/ethereum/go-ethereum/common"
 	"io/ioutil"
 	"net/http"

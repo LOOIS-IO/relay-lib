@@ -20,9 +20,9 @@ package loopringaccessor
 
 import (
 	"errors"
-	"github.com/LOOIS-IO/relay-lib/eth/abi"
-	"github.com/LOOIS-IO/relay-lib/eth/accessor"
-	"github.com/LOOIS-IO/relay-lib/types"
+	"github.com/Loopring/relay-lib/eth/abi"
+	"github.com/Loopring/relay-lib/eth/accessor"
+	"github.com/Loopring/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
@@ -44,18 +44,6 @@ func Erc20Allowance(tokenAddress, ownerAddress, spenderAddress common.Address, b
 		return nil, err
 	} else {
 		return allowance.BigInt(), err
-	}
-}
-
-func Erc20Decimals(tokenAddress common.Address, blockParameter string) (*big.Int, error) {
-	var decimals types.Big
-	callMethod := accessor.ContractCallMethod(loopringParams.Erc20Abi, tokenAddress)
-	if err := callMethod(&decimals, "DECIMALS", blockParameter); nil == err {
-		return decimals.BigInt(), err
-	} else if err := callMethod(&decimals, "decimals", blockParameter); nil == err {
-		return decimals.BigInt(), err
-	} else {
-		return nil, err
 	}
 }
 

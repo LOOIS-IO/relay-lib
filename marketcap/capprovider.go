@@ -19,8 +19,8 @@
 package marketcap
 
 import (
-	util "github.com/LOOIS-IO/relay-lib/marketutil"
-	"github.com/LOOIS-IO/relay-lib/types"
+	util "github.com/Loopring/relay-lib/marketutil"
+	"github.com/Loopring/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"strings"
@@ -73,6 +73,7 @@ type MarketCapProvider interface {
 	GetEthCap() (*big.Rat, error)
 	GetMarketCapByCurrency(tokenAddress common.Address, currencyStr string) (*big.Rat, error)
 	IsOrderValueDust(state *types.OrderState) bool
+	LghIsOrderValueDust(state *types.OrderState) (string,*big.Rat,bool)
 	IsValueDusted(value *big.Rat) bool
 }
 

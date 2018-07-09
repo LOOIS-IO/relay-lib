@@ -20,15 +20,13 @@ package broadcast
 
 import "github.com/Loopring/relay-lib/log"
 
-type DefaultBroadcaster struct {
+type MatrixBroadcaster struct {
 }
 
-func (*DefaultBroadcaster) pub() (err error) {
-	log.Debug("default broadcaster doesn't publish msg")
+func (*MatrixBroadcaster) pub() (err error) {
 	return nil
 }
 
-func (*DefaultBroadcaster) sub() (err error) {
-	log.Debug("default broadcaster doesn't subscribe msg")
+func (*MatrixBroadcaster) sub() (err error) {
 	return nil
 }

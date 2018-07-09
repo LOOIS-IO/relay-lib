@@ -20,11 +20,11 @@ package loopringaccessor_test
 
 import (
 	"encoding/json"
-	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cache/redis"
-	"github.com/LOOIS-IO/relay-lib/eth/accessor"
-	"github.com/LOOIS-IO/relay-lib/eth/loopringaccessor"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/cache"
+	"github.com/Loopring/relay-lib/cache/redis"
+	"github.com/Loopring/relay-lib/eth/accessor"
+	"github.com/Loopring/relay-lib/eth/loopringaccessor"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/ethereum/go-ethereum/common"
 	"go.uber.org/zap"
 	"testing"

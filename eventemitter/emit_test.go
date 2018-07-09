@@ -19,7 +19,7 @@
 package eventemitter_test
 
 import (
-	"github.com/LOOIS-IO/relay-lib/eventemitter"
+	"github.com/Loopring/relay-lib/eventemitter"
 	"testing"
 	"time"
 )

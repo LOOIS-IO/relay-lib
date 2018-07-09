@@ -19,7 +19,7 @@
 package dao
 
 import (
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"time"

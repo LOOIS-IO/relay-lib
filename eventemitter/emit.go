@@ -19,7 +19,7 @@
 package eventemitter
 
 import (
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/log"
 	"sync"
 )
 
@@ -29,7 +29,6 @@ type Topic string
 
 const (
 	NewOrder = "NewOrder"
-	NewOrderForBroadcast = "NewOrderForBroadcast"
 
 	WethDeposit         = "WethDeposit"
 	WethWithdrawal      = "WethWithdrawal"
@@ -133,8 +132,15 @@ func Emit(topic string, eventData EventData) {
 				defer func() {
 					wg.Add(-1)
 				}()
+
 				if err := ob.Handle(eventData); err != nil {
-					log.Errorf(err.Error())
+					//fmt.Println("[lgh:] ===== begin")
+					//fmt.Println(eventData)
+					if topic == "Transfer" {
+						log.Warnf("[relay] emit topic: %s, err: %s", topic, err.Error())
+					}else{
+						log.Errorf("[relay] emit topic: %s, err: %s", topic, err.Error())
+					}
 				}
 			}(ob)
 		}

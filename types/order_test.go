@@ -22,8 +22,8 @@ import (
 	"bytes"
 	"encoding/gob"
 	"encoding/json"
-	"github.com/LOOIS-IO/relay-lib/crypto"
-	"github.com/LOOIS-IO/relay-lib/types"
+	"github.com/Loopring/relay-lib/crypto"
+	"github.com/Loopring/relay-lib/types"
 	"math/big"
 	"testing"
 )

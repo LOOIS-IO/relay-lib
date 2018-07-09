@@ -20,7 +20,7 @@ package zklock
 
 import (
 	"fmt"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/samuel/go-zookeeper/zk"
 )
 

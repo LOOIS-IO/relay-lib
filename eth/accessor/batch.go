@@ -19,7 +19,7 @@
 package accessor
 
 import (
-	ethtyp "github.com/LOOIS-IO/relay-lib/eth/types"
+	ethtyp "github.com/Loopring/relay-lib/eth/types"
 	"github.com/ethereum/go-ethereum/rpc"
 )
 

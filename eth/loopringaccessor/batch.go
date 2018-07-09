@@ -19,8 +19,8 @@
 package loopringaccessor
 
 import (
-	ethtyp "github.com/LOOIS-IO/relay-lib/eth/types"
-	"github.com/LOOIS-IO/relay-lib/types"
+	ethtyp "github.com/Loopring/relay-lib/eth/types"
+	"github.com/Loopring/relay-lib/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/rpc"
 )

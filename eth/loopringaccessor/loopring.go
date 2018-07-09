@@ -19,10 +19,11 @@
 package loopringaccessor
 
 import (
-	"github.com/LOOIS-IO/relay-lib/eth/abi"
-	"github.com/LOOIS-IO/relay-lib/eth/accessor"
-	"github.com/LOOIS-IO/relay-lib/log"
+	"github.com/Loopring/relay-lib/eth/abi"
+	"github.com/Loopring/relay-lib/eth/accessor"
+	"github.com/Loopring/relay-lib/log"
 	"github.com/ethereum/go-ethereum/common"
+	"fmt"
 )
 
 var loopringParams *LoopringParams
@@ -51,10 +52,12 @@ func Initialize(options LoopringProtocolOptions) error {
 	loopringParams = &LoopringParams{}
 
 	if loopringParams.Erc20Abi, err = abi.New(Erc20AbiStr); nil != err {
+		fmt.Println("[lgh:]1",err)
 		return err
 	}
 
 	if loopringParams.WethAbi, err = abi.New(WethAbiStr); nil != err {
+		fmt.Println("[lgh:]2",err)
 		return err
 	}
 
@@ -81,18 +84,21 @@ func Initialize(options LoopringProtocolOptions) error {
 		callMethod := accessor.ContractCallMethod(loopringParams.ProtocolImplAbi, impl.ContractAddress)
 		var addr string
 		if err := callMethod(&addr, "lrcTokenAddress", "latest"); nil != err {
+			fmt.Println("[lgh:]3",err)
 			return err
 		} else {
 			log.Debugf("version:%s, contract:%s, lrcTokenAddress:%s", version, address, addr)
 			impl.LrcTokenAddress = common.HexToAddress(addr)
 		}
 		if err := callMethod(&addr, "tokenRegistryAddress", "latest"); nil != err {
+			fmt.Println("[lgh:]4",err)
 			return err
 		} else {
 			log.Debugf("version:%s, contract:%s, tokenRegistryAddress:%s", version, address, addr)
 			impl.TokenRegistryAddress = common.HexToAddress(addr)
 		}
 		if err := callMethod(&addr, "delegateAddress", "latest"); nil != err {
+			fmt.Println("[lgh:]5",err)
 			return err
 		} else {
 			log.Debugf("version:%s, contract:%s, delegateAddress:%s", version, address, addr)
@@ -117,6 +123,7 @@ func Initialize(options LoopringProtocolOptions) error {
 		}
 	}
 	if delegateAbi, err := abi.New(options.DelegateAbi); nil != err {
+		fmt.Println("[lgh:]5",err)
 		return err
 	} else {
 		loopringParams.DelegateAbi = delegateAbi
@@ -130,6 +137,7 @@ func Initialize(options LoopringProtocolOptions) error {
 		}
 	}
 	if tokenRegistryAbi, err := abi.New(options.TokenRegistryAbi); nil != err {
+		fmt.Println("[lgh:]6",err)
 		return err
 	} else {
 		loopringParams.TokenRegistryAbi = tokenRegistryAbi
