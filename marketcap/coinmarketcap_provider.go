@@ -29,7 +29,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cloudwatch"
 	"github.com/LOOIS-IO/relay-lib/log"
 	util "github.com/LOOIS-IO/relay-lib/marketutil"
 	"github.com/LOOIS-IO/relay-lib/sns"
@@ -314,9 +313,9 @@ func (p *CapProvider_CoinMarketCap) syncMarketCapFromAPIWithZk() {
 			case <-time.After(time.Duration(p.duration) * time.Second):
 				log.Debugf("sync marketcap(key:%s) from api...", p.zklockName())
 				p.syncMarketCapFromAPI()
-				if err := cloudwatch.PutHeartBeatMetric(p.heartBeatName()); nil != err {
-					log.Errorf("err:%s", err.Error())
-				}
+				//if err := cloudwatch.PutHeartBeatMetric(p.heartBeatName()); nil != err {
+				//	log.Errorf("err:%s", err.Error())
+				//}
 			case stopped := <-stopChan:
 				if stopped {
 					zklock.ReleaseLock(p.zklockName())
