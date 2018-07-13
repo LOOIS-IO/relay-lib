@@ -401,7 +401,7 @@ func (p *CapProvider_CoinMarketCap) syncMarketCapFromRedis() error {
 			data, err = cache.Get(p.cacheKey(c1.WebsiteSlug, p.currency))
 		}
 		if nil != err {
-			log.Errorf("can't get marketcap of token:%s", tokenAddr.Hex())
+			log.Infof("can't get marketcap of token:%s", tokenAddr.Hex())
 		} else {
 			c := &CoinMarketCap{}
 			if err := json.Unmarshal(data, c); nil != err {
