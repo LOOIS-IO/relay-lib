@@ -20,7 +20,6 @@ package gasprice_evaluator
 
 import (
 	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cloudwatch"
 	"github.com/LOOIS-IO/relay-lib/eth/accessor"
 	ethtyp "github.com/LOOIS-IO/relay-lib/eth/types"
 	"github.com/LOOIS-IO/relay-lib/log"
@@ -67,9 +66,9 @@ func (e *GasPriceEvaluator) start() {
 					return
 				default:
 					blockInterface, err := iterator.Next()
-					if err := cloudwatch.PutHeartBeatMetric(HEARTBEAT_Evaluated_GasPrice); nil != err {
-						log.Errorf("err:%s", err.Error())
-					}
+					//if err := cloudwatch.PutHeartBeatMetric(HEARTBEAT_Evaluated_GasPrice); nil != err {
+					//	log.Errorf("err:%s", err.Error())
+					//}
 					if nil == err {
 						blockWithTxAndReceipt := blockInterface.(*ethtyp.BlockWithTxAndReceipt)
 						log.Debugf("gasPriceEvaluator, blockNumber:%s, gasPrice:%s", blockWithTxAndReceipt.Number.BigInt().String(), e.gasPrice.String())

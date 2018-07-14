@@ -29,7 +29,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/LOOIS-IO/relay-lib/cache"
-	"github.com/LOOIS-IO/relay-lib/cloudwatch"
 	"github.com/LOOIS-IO/relay-lib/log"
 	util "github.com/LOOIS-IO/relay-lib/marketutil"
 	"github.com/LOOIS-IO/relay-lib/sns"
@@ -167,6 +166,26 @@ func (p *CapProvider_CoinMarketCap) LegalCurrencyValueByCurrency(tokenAddress co
 	}
 }
 
+func (p *CapProvider_CoinMarketCap) LghLegalCurrencyValueByCurrency(tokenAddress common.Address,
+	amount *big.Rat, currencyStr string) (*big.Rat,string, error) {
+	if c, exists := p.tokenMarketCaps[tokenAddress]; !exists {
+		return nil, "",errors.New("not found tokenCap:" + tokenAddress.Hex())
+	} else {
+		v := new(big.Rat).SetInt(c.Decimals)
+		v.Quo(amount, v)
+		if price, err := p.GetMarketCapByCurrency(tokenAddress, currencyStr); nil != err {
+			log.Errorf("err:%s", err.Error())
+			return nil,"", err
+		} else {
+			logStr := fmt.Sprintf("LegalCurrencyValueByCurrency token:%s,decimals:%s, amount:%s, currency:%s, price:%s",
+				tokenAddress.Hex(), c.Decimals.String(), amount.FloatString(2), currencyStr, price.FloatString(2))
+			log.Debugf(logStr)
+			v.Mul(price, v)
+			return v,logStr,nil
+		}
+	}
+}
+
 func (p *CapProvider_CoinMarketCap) GetMarketCap(tokenAddress common.Address) (*big.Rat, error) {
 	return p.GetMarketCapByCurrency(tokenAddress, p.currency)
 }
@@ -176,11 +195,12 @@ func (p *CapProvider_CoinMarketCap) GetEthCap() (*big.Rat, error) {
 }
 
 func (p *CapProvider_CoinMarketCap) getMarketCapFromRedis(websiteSlug string, currencyStr string) (cap *CoinMarketCap, err error) {
-	cap = &CoinMarketCap{}
-	if data, err := cache.Get(p.cacheKey(websiteSlug, currencyStr)); nil != err {
-		log.Errorf("err:%s", err.Error())
+	cacheKey := p.cacheKey(websiteSlug, currencyStr)
+	if data, err := cache.Get(cacheKey); nil != err {
+		log.Errorf("find cache key: %s, err: %s", cacheKey, err.Error())
 		return nil, err
 	} else {
+		cap = &CoinMarketCap{}
 		if err := json.Unmarshal(data, cap); nil != err {
 			log.Errorf("get marketcap of token err:%s", err.Error())
 			return nil, err
@@ -243,7 +263,7 @@ func (p *CapProvider_CoinMarketCap) Start() {
 	go func() {
 		for {
 			select {
-			case <-time.After(time.Duration(p.duration) * time.Minute):
+			case <-time.After(time.Duration(p.duration) * time.Second):
 				log.Debugf("sync marketcap from redis...")
 				if err := p.syncMarketCapFromRedis(); nil != err {
 					log.Errorf("can't sync marketcap, time:%d", time.Now().Unix())
@@ -290,12 +310,12 @@ func (p *CapProvider_CoinMarketCap) syncMarketCapFromAPIWithZk() {
 	go func() {
 		for {
 			select {
-			case <-time.After(time.Duration(p.duration) * time.Minute):
+			case <-time.After(time.Duration(p.duration) * time.Second):
 				log.Debugf("sync marketcap(key:%s) from api...", p.zklockName())
 				p.syncMarketCapFromAPI()
-				if err := cloudwatch.PutHeartBeatMetric(p.heartBeatName()); nil != err {
-					log.Errorf("err:%s", err.Error())
-				}
+				//if err := cloudwatch.PutHeartBeatMetric(p.heartBeatName()); nil != err {
+				//	log.Errorf("err:%s", err.Error())
+				//}
 			case stopped := <-stopChan:
 				if stopped {
 					zklock.ReleaseLock(p.zklockName())
@@ -306,15 +326,16 @@ func (p *CapProvider_CoinMarketCap) syncMarketCapFromAPIWithZk() {
 	}()
 }
 
-func (p *CapProvider_CoinMarketCap) syncMarketCapFromAPI() error {
+func (p *CapProvider_CoinMarketCap) syncMarketCapFromAPI() error  {
 	log.Debugf("syncMarketCapFromAPI...")
 	//https://api.coinmarketcap.com/v2/ticker/?convert=%s&start=%d&limit=%d
 	numCryptocurrencies := 105
 	start := 0
 	limit := 100
+
 	for numCryptocurrencies > 0 {
 		url := fmt.Sprintf(p.baseUrl, p.currency, start, limit)
-		println(url)
+		//println(url)
 		resp, err := http.Get(url)
 		if err != nil {
 			log.Errorf("err:%s", err.Error())
@@ -357,7 +378,6 @@ func (p *CapProvider_CoinMarketCap) syncMarketCapFromAPI() error {
 				}
 			}
 		}
-
 	}
 
 	return nil
@@ -381,7 +401,7 @@ func (p *CapProvider_CoinMarketCap) syncMarketCapFromRedis() error {
 			data, err = cache.Get(p.cacheKey(c1.WebsiteSlug, p.currency))
 		}
 		if nil != err {
-			log.Errorf("can't get marketcap of token:%s", tokenAddr.Hex())
+			log.Infof("can't get marketcap of token:%s", tokenAddr.Hex())
 		} else {
 			c := &CoinMarketCap{}
 			if err := json.Unmarshal(data, c); nil != err {
@@ -496,6 +516,13 @@ func (p *CapProvider_CoinMarketCap) IsOrderValueDust(state *types.OrderState) bo
 	remainedValue, _ := p.LegalCurrencyValue(state.RawOrder.TokenS, remainedAmountS)
 
 	return p.IsValueDusted(remainedValue)
+}
+
+func (p *CapProvider_CoinMarketCap) LghIsOrderValueDust(state *types.OrderState) (string,*big.Rat,bool) {
+	remainedAmountS, _ := state.RemainedAmount()
+	remainedValue,logStr, _ := p.LghLegalCurrencyValueByCurrency(state.RawOrder.TokenS, remainedAmountS,p.currency)//p.LegalCurrencyValue(state.RawOrder.TokenS, remainedAmountS)
+
+	return logStr,remainedValue,p.IsValueDusted(remainedValue)
 }
 
 func (p *CapProvider_CoinMarketCap) IsValueDusted(value *big.Rat) bool {

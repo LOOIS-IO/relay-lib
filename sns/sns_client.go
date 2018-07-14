@@ -40,28 +40,24 @@ export AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/.aws/credentials
 type SnsClient struct {
 	innerClient *sns.SNS
 	topicArn    string
-	Enabled   bool
+	valid       bool
 }
 
 type SnsConfig struct {
-	Enabled bool
 	SNSTopicArn string
-	Region string
 }
+
+const region = "ap-northeast-1"
 
 var sc *SnsClient
 
 func Initialize(config SnsConfig) (*SnsClient, error) {
-	if !config.Enabled {
-		sc = &SnsClient{nil, "", false}
-		return sc, nil
-	}
-	if len(config.SNSTopicArn) == 0 || len(config.Region) == 0 {
-		return nil, fmt.Errorf("SnsConfig invalid : %+v", config)
+	if len(config.SNSTopicArn) == 0 {
+		return nil, fmt.Errorf("Sns TopicArn not set, will not init sns client")
 	}
 	//NOTE: use default config ~/.asw/credentials
 	sess, err := session.NewSession(&aws.Config{
-		Region:      aws.String(config.Region),
+		Region:      aws.String(region),
 		Credentials: credentials.NewSharedCredentials("", ""),
 	})
 	if err != nil {
@@ -75,8 +71,6 @@ func Initialize(config SnsConfig) (*SnsClient, error) {
 func PublishSns(subject string, message string) error {
 	if sc == nil {
 		return fmt.Errorf("SnsClient not initialized, will not send message")
-	} else if !sc.Enabled {
-		return nil
 	} else {
 		input := &sns.PublishInput{}
 		input.SetTopicArn(sc.topicArn)

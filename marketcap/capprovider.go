@@ -73,6 +73,7 @@ type MarketCapProvider interface {
 	GetEthCap() (*big.Rat, error)
 	GetMarketCapByCurrency(tokenAddress common.Address, currencyStr string) (*big.Rat, error)
 	IsOrderValueDust(state *types.OrderState) bool
+	LghIsOrderValueDust(state *types.OrderState) (string,*big.Rat,bool)
 	IsValueDusted(value *big.Rat) bool
 }
 

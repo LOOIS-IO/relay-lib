@@ -89,6 +89,7 @@ type token struct {
 	Decimals int    `json:"Decimals"`
 	IsMarket bool   `json:"IsMarket"`
 	IcoPrice string `json:"IcoPrice"`
+	AreaType int    `json:"areaType"`
 }
 
 func (t *token) convert() types.Token {
@@ -112,7 +113,7 @@ func (t *token) convert() types.Token {
 		dst.IcoPrice = new(big.Rat)
 		dst.IcoPrice.SetString(t.IcoPrice)
 	}
-
+	dst.AreaType = t.AreaType
 	return dst
 }
 
@@ -316,6 +317,17 @@ func isSupportedToken(token string) bool {
 func AliasToAddress(t string) common.Address {
 	return AllTokens[t].Protocol
 }
+
+func AliasToToken(t string) (*types.Token, error) {
+	for _, v := range AllTokens {
+		if v.Symbol == t {
+			return &v, nil
+		}
+	}
+
+	return nil, fmt.Errorf("unsupported symbol:%s", t)
+}
+
 
 func AddressToAlias(t string) string {
 	for k, v := range AllTokens {

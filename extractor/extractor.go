@@ -42,7 +42,9 @@ func Initialize(options kafka.KafkaOptions, group string) error {
 
 	serv.consumer = &kafka.ConsumerRegister{}
 	serv.consumer.Initialize(options.Brokers)
-	if err := serv.consumer.RegisterTopicAndHandler(kafka_topic, group, types.KafkaOnChainEvent{}, serv.handle); err != nil {
+	if err := serv.consumer.RegisterTopicAndHandler(
+		kafka_topic,
+		group, types.KafkaOnChainEvent{}, serv.handle); err != nil {
 		return err
 	}
 
@@ -62,7 +64,8 @@ func (s *ExtractorService) handle(input interface{}) error {
 
 	// todo: delete after test
 	log.Debugf("extractor, consume topic:%s ,data:%s", src.Topic, src.Data)
-
+	fmt.Println("[lgh:]","extractor 调用 handle 方法",src.Topic)
+	// lgh: ①
 	eventemitter.Emit(src.Topic, event)
 
 	return nil
@@ -70,6 +73,9 @@ func (s *ExtractorService) handle(input interface{}) error {
 
 // convert types.kafkaOnChainEvent to kind of events
 func Disassemble(src *types.KafkaOnChainEvent) (interface{}, error) {
+
+	// Topic: eventemitter.Transfer:
+	// event = &types.TransferEvent{}
 	event := topicToEvent(src.Topic)
 	if event == nil {
 		return nil, fmt.Errorf("get event from topic error:cann't found any match topic")
