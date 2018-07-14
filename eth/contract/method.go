@@ -76,10 +76,30 @@ func GenerateSubmitRingMethodInputsData(ring *types.Ring, feeReceipt common.Addr
 	}
 	for _, filledOrder := range ring.Orders {
 		order := filledOrder.OrderState.RawOrder
-		inputs.AddressList = append(inputs.AddressList, [4]common.Address{order.Owner, order.TokenS, order.WalletAddress, order.AuthAddr})
-		rateAmountS, _ := new(big.Int).SetString(filledOrder.RateAmountS.FloatString(0), 10)
-		inputs.UintArgsList = append(inputs.UintArgsList, [6]*big.Int{order.AmountS, order.AmountB, order.ValidSince, order.ValidUntil, order.LrcFee, rateAmountS})
-		inputs.Uint8ArgsList = append(inputs.Uint8ArgsList, [1]uint8{order.MarginSplitPercentage})
+		inputs.AddressList = append(
+			inputs.AddressList,
+			[4]common.Address{
+				order.Owner, //
+				order.TokenS,
+				order.WalletAddress,
+				order.AuthAddr})
+
+		rateAmountS, _ :=
+			new(big.Int).SetString(filledOrder.RateAmountS.FloatString(0), 10)
+
+		inputs.UintArgsList = append(
+			inputs.UintArgsList,
+			[6]*big.Int{
+				order.AmountS,
+				order.AmountB,
+				order.ValidSince,
+				order.ValidUntil,
+				order.LrcFee,
+				rateAmountS})
+
+		inputs.Uint8ArgsList = append(
+			inputs.Uint8ArgsList,
+			[1]uint8{order.MarginSplitPercentage})
 
 		inputs.BuyNoMoreThanBList = append(inputs.BuyNoMoreThanBList, order.BuyNoMoreThanAmountB)
 

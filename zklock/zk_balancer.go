@@ -42,7 +42,7 @@ const balancerShareBasePath = "/loopring_balancer"
 const worker_path = "worker"
 const event_path = "event"
 
-const localIpPrefix = "172.31"
+const localIpPrefix = "172.17"
 const releasingTimeout = 120
 
 type ZkBalancer struct {

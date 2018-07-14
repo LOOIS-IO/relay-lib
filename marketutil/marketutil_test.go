@@ -41,7 +41,7 @@ func TestCalculatePrice(t *testing.T) {
 	if price != 0.00007 {
 		t.Error("not right")
 	} else {
-		t.Error("xxxxx")
+		t.Log("xxxxx")
 	}
 	t.Fatal("ksfjlsdjfklj")
 }
