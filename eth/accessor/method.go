@@ -296,7 +296,10 @@ func (accessor *ethNodeAccessor) ContractSendTransactionMethod(routeParam string
 }
 
 func (iterator *BlockIterator) Next() (interface{}, error) {
-	if nil != iterator.endNumber && iterator.endNumber.Cmp(big.NewInt(0)) > 0 && iterator.endNumber.Cmp(iterator.currentNumber) < 0 {
+
+	if  nil != iterator.endNumber &&
+		iterator.endNumber.Cmp(big.NewInt(0)) > 0 &&
+		iterator.endNumber.Cmp(iterator.currentNumber) < 0 {
 		return nil, errors.New("finished")
 	}
 
@@ -305,21 +308,24 @@ func (iterator *BlockIterator) Next() (interface{}, error) {
 		log.Errorf("err:%s", err.Error())
 		return nil, err
 	} else {
-		confirmNumber := iterator.currentNumber.Uint64() + iterator.confirms
+		confirmNumber := iterator.currentNumber.Uint64() + iterator.confirms // +5
+		// 100 < 100 + 5
 		if blockNumber.Uint64() < confirmNumber {
-		hasNext:
-			for {
-				select {
-				// todo(fk):modify this duration
-				case <-time.After(time.Duration(5 * time.Second)):
-					if err1 := iterator.ethClient.RetryCall("latest", 2, &blockNumber, "eth_blockNumber"); nil == err1 && blockNumber.Uint64() >= confirmNumber {
-						break hasNext
+			hasNext:
+				for {
+					select {
+					// todo(fk):modify this duration
+					case <-time.After(time.Duration(5 * time.Second)):
+						if err1 := iterator.ethClient.RetryCall(
+							"latest", 2,
+							&blockNumber, "eth_blockNumber"); nil == err1 && blockNumber.Uint64() >= confirmNumber {
+							// 106 > 105
+							break hasNext
+						}
 					}
 				}
-			}
 		}
 	}
-
 	block, err := iterator.ethClient.GetFullBlock(iterator.currentNumber, iterator.withTxData)
 	if nil == err {
 		iterator.currentNumber.Add(iterator.currentNumber, big.NewInt(1))
