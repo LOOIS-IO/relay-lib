@@ -146,10 +146,6 @@ func getTokenAndMarketFromDB(tokenfile string) (
 	if err := json.Unmarshal(bs, &list); err != nil {
 		log.Fatalf("market util unmarshal tokens failed:%s", err.Error())
 	}
-	data2,_ := json.Marshal(types.Token{})
-	fmt.Println(string(data2))
-	data,_ := json.Marshal(list)
-	panic(string(data))
 	for _, v := range list {
 		if v.Deny == false {
 			t := v.convert()
