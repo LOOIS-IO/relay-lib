@@ -90,7 +90,7 @@ type token struct {
 	IsMarket bool   `json:"IsMarket"`
 	IcoPrice string `json:"IcoPrice"`
 	AreaType int    `json:"areaType"`
-	IsApproveLimit    bool  `json:"isApproveLimit"`
+	ApproveType    int  `json:"approveType"`
 }
 
 func (t *token) convert() types.Token {
