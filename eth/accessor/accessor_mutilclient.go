@@ -136,8 +136,20 @@ func (mc *MutilClient) bestClient(routeParam string) *RpcClient {
 		log.Debugf("len(urls) == 0")
 		mc.syncBlockNumber()
 		for url, client := range mc.clients {
-			if _, exists := mc.downedClients[url]; !exists && (nil == client.blockNumber || client.blockNumber.Cmp(blockNumber.BigInt()) >= 0) {
+			log.Debugf("init urls loop %s",url)
+			_, exists := mc.downedClients[url]
+			if !exists && (nil == client.blockNumber || client.blockNumber.Cmp(blockNumber.BigInt()) >= 0) {
 				urls = append(urls, url)
+			}else{
+				if exists {
+					log.Debugf("init urls loop %s already exits",url)
+				}
+				if nil != client.blockNumber {
+					log.Debugf("init urls loop  nil != client.blockNumber ")
+				}
+				if client.blockNumber.Cmp(blockNumber.BigInt()) < 0 {
+					log.Debugf("init urls loop  区块号小 ")
+				}
 			}
 		}
 		log.Debugf("after syncBlockNumber len(urls) == %d", len(urls))
@@ -154,17 +166,30 @@ func (mc *MutilClient) bestClient(routeParam string) *RpcClient {
 }
 
 func (mc *MutilClient) syncBlockNumber() {
+	log.Debugf("==== start syncBlockNumber size of clients = %d ====",len(mc.clients))
 	for _, client := range mc.clients {
+		log.Debugf("start syncBlockNumber url of clients = %s ",client.url)
 		var blockNumber types.Big
 		if err := client.client.Call(&blockNumber, "eth_blockNumber"); nil != err {
+			log.Debugf("syncBlockNumber error %s", err.Error())
 			mc.downedClients[client.url] = client
 		} else {
 			delete(mc.downedClients, client.url)
 			client.blockNumber = blockNumber.BigInt()
 			blockNumberStr := blockNumber.BigInt().String()
-			cache.SAdd(USAGE_CLIENT_BLOCK+blockNumberStr, cacheDuration, []byte(client.url))
-			cache.ZAdd(BLOCKS, int64(0), []byte(blockNumberStr), []byte(blockNumberStr))
-			cache.ZRemRangeByScore(BLOCKS, int64(0), blockNumber.Int64()-blocks_count)
+			err := cache.SAdd(USAGE_CLIENT_BLOCK+blockNumberStr, cacheDuration, []byte(client.url))
+			if err != nil {
+				log.Debugf("syncBlockNumber cache.SAdd error %s", err.Error())
+			}
+			err = cache.ZAdd(BLOCKS, int64(0), []byte(blockNumberStr), []byte(blockNumberStr))
+			if err != nil {
+				log.Debugf("syncBlockNumber cache.ZAdd error %s", err.Error())
+			}
+			_,err = cache.ZRemRangeByScore(BLOCKS, int64(0), blockNumber.Int64()-blocks_count)
+			if err != nil {
+				log.Debugf("syncBlockNumber cache.ZRemRangeByScore error %s", err.Error())
+			}
+			log.Debugf("==== syncBlockNumber end ====")
 		}
 	}
 }
